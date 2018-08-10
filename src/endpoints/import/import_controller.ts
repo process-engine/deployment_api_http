@@ -2,7 +2,7 @@ import {
   DeploymentContext,
   DeploymentRequest,
   IDeploymentApiService,
-  ImportProcessModelRequestPayload,
+  ImportProcessDefinitionsRequestPayload,
 } from '@process-engine/deployment_api_contracts';
 
 import {Response} from 'express';
@@ -24,7 +24,7 @@ export class ImportController {
 
   public async importProcessModel(request: DeploymentRequest, response: Response): Promise<void> {
     const context: DeploymentContext = request.deploymentContext;
-    const payload: ImportProcessModelRequestPayload = request.body;
+    const payload: ImportProcessDefinitionsRequestPayload = request.body;
 
     const result: any = await this.deploymentApiService.importBpmnFromXml(context, payload);
 
