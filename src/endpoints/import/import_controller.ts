@@ -1,6 +1,7 @@
+import {HttpRequestWithIdentity} from '@essential-projects/http_contracts';
+import {IIdentity} from '@essential-projects/iam_contracts';
+
 import {
-  DeploymentContext,
-  DeploymentRequest,
   IDeploymentApiService,
   ImportProcessDefinitionsRequestPayload,
 } from '@process-engine/deployment_api_contracts';
@@ -22,11 +23,11 @@ export class ImportController {
     return this._deploymentService;
   }
 
-  public async importProcessModel(request: DeploymentRequest, response: Response): Promise<void> {
-    const context: DeploymentContext = request.deploymentContext;
+  public async importProcessModel(request: HttpRequestWithIdentity, response: Response): Promise<void> {
+    const identity: IIdentity = request.identity;
     const payload: ImportProcessDefinitionsRequestPayload = request.body;
 
-    const result: any = await this.deploymentApiService.importBpmnFromXml(context, payload);
+    const result: any = await this.deploymentApiService.importBpmnFromXml(identity, payload);
 
     response.status(this.httpCodeSuccessfulResponse).json(result);
   }

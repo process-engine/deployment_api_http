@@ -21,7 +21,9 @@
   "dependencies": {
     "@essential-projects/bootstrapper_contracts": "1.0.0",
     "@essential-projects/errors_ts": "1.3.2",
+    "@essential-projects/http_contracts": "feature~add_custom_http_request_object",
     "@essential-projects/http_node": "3.0.2",
+    "@essential-projects/iam_contracts": "3.1.0",
     "@process-engine/deployment_api_contracts": "feature~remove_execution_context",
     "async-middleware": "1.2.1"
   },
