@@ -2,7 +2,7 @@ import {HttpRequestWithIdentity} from '@essential-projects/http_contracts';
 import {IIdentity} from '@essential-projects/iam_contracts';
 
 import {
-  IDeploymentApiService,
+  IDeploymentApi,
   ImportProcessDefinitionsRequestPayload,
 } from '@process-engine/deployment_api_contracts';
 
@@ -13,13 +13,13 @@ export class ImportController {
 
   private httpCodeSuccessfulResponse: number = 200;
 
-  private _deploymentService: IDeploymentApiService;
+  private _deploymentService: IDeploymentApi;
 
-  constructor(deploymentApiService: IDeploymentApiService) {
+  constructor(deploymentApiService: IDeploymentApi) {
     this._deploymentService = deploymentApiService;
   }
 
-  private get deploymentApiService(): IDeploymentApiService {
+  private get deploymentApiService(): IDeploymentApi {
     return this._deploymentService;
   }
 
