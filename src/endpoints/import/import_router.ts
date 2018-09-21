@@ -1,7 +1,7 @@
 import {BaseRouter} from '@essential-projects/http_node';
 import {restSettings} from '@process-engine/deployment_api_contracts';
 
-import {resolveDeploymentContext} from './../../middlewares/resolve_deployment_context';
+import {resolveIdentity} from './../../middlewares/resolve_identity';
 import {ImportController} from './import_controller';
 
 import {wrap} from 'async-middleware';
@@ -29,7 +29,7 @@ export class ImportRouter extends BaseRouter {
   }
 
   private registerMiddlewares(): void {
-    this.router.use(wrap(resolveDeploymentContext));
+    this.router.use(wrap(resolveIdentity));
   }
 
   private registerRoutes(): void {
