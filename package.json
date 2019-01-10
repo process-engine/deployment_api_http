@@ -1,6 +1,6 @@
 {
   "name": "@process-engine/deployment_api_http",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Contains the HTTP endpoints for the deployment api.",
   "main": "dist/commonjs/index.js",
   "typings": "dist/index.d.ts",
@@ -23,7 +23,7 @@
     "@essential-projects/errors_ts": "~1.4.0",
     "@essential-projects/http_contracts": "~2.3.0",
     "@essential-projects/http_node": "~4.1.0",
-    "@essential-projects/iam_contracts": "~3.2.0",
+    "@essential-projects/iam_contracts": "~3.3.0",
     "@process-engine/deployment_api_contracts": "~1.0.0",
     "async-middleware": "1.2.1"
   },
