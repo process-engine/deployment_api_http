@@ -23,7 +23,6 @@
     "@essential-projects/errors_ts": "~1.4.0",
     "@essential-projects/http_contracts": "~2.3.0",
     "@essential-projects/http_node": "~4.1.0",
-    "@essential-projects/iam_contracts": "~3.3.0",
     "@process-engine/deployment_api_contracts": "~1.0.0",
     "async-middleware": "1.2.1"
   },
