@@ -1,7 +1,8 @@
 import {BaseRouter} from '@essential-projects/http_node';
-import {restSettings} from '@process-engine/deployment_api_contracts';
+import {IIdentityService} from '@essential-projects/iam_contracts';
 
-import {resolveIdentity} from './../../middlewares/resolve_identity';
+import {restSettings} from '@process-engine/deployment_api_contracts';
+import {createResolveIdentityMiddleware, MiddlewareFunction} from '../../middlewares/index';
 import {ImportController} from './import_controller';
 
 import {wrap} from 'async-middleware';
@@ -9,10 +10,12 @@ import {wrap} from 'async-middleware';
 export class ImportRouter extends BaseRouter {
 
   private _importController: ImportController;
+  private _identityService: IIdentityService;
 
-  constructor(importController: ImportController) {
+  constructor(importController: ImportController, identityService: IIdentityService) {
     super();
     this._importController = importController;
+    this._identityService = identityService;
   }
 
   private get importController(): ImportController {
@@ -29,6 +32,7 @@ export class ImportRouter extends BaseRouter {
   }
 
   private registerMiddlewares(): void {
+    const resolveIdentity: MiddlewareFunction = createResolveIdentityMiddleware(this._identityService);
     this.router.use(wrap(resolveIdentity));
   }
 
