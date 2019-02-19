@@ -6,7 +6,7 @@ const routerDiscoveryTag = require('@essential-projects/bootstrapper_contracts')
 function registerInContainer(container) {
 
   container.register('DeploymentApiImportRouter', ImportEndpoint.ImportRouter)
-    .dependencies('DeploymentApiImportController')
+    .dependencies('DeploymentApiImportController', 'IdentityService')
     .singleton()
     .tags(routerDiscoveryTag);
 
