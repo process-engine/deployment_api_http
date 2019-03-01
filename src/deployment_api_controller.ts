@@ -3,12 +3,13 @@ import {IIdentity} from '@essential-projects/iam_contracts';
 
 import {
   IDeploymentApi,
+  IDeploymentApiHttpController,
   ImportProcessDefinitionsRequestPayload,
 } from '@process-engine/deployment_api_contracts';
 
 import {Response} from 'express';
 
-export class ImportController {
+export class DeploymentApiController implements IDeploymentApiHttpController {
   public config: any = undefined;
 
   private httpCodeSuccessfulResponse: number = 200;
@@ -32,4 +33,12 @@ export class ImportController {
     response.status(this.httpCodeSuccessfulResponse).json(result);
   }
 
+  public async undeployProcessModel(request: HttpRequestWithIdentity, response: Response): Promise<void> {
+    const identity: IIdentity = request.identity;
+    const processModelId: string = request.params.process_model_id;
+
+    const result: any = await this.deploymentApiService.undeploy(identity, processModelId);
+
+    response.status(this.httpCodeSuccessfulResponse).json(result);
+  }
 }
