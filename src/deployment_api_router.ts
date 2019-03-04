@@ -2,24 +2,25 @@ import {BaseRouter} from '@essential-projects/http_node';
 import {IIdentityService} from '@essential-projects/iam_contracts';
 
 import {restSettings} from '@process-engine/deployment_api_contracts';
-import {createResolveIdentityMiddleware, MiddlewareFunction} from '../../middlewares/index';
-import {ImportController} from './import_controller';
+
+import {DeploymentApiController} from './deployment_api_controller';
+import {createResolveIdentityMiddleware, MiddlewareFunction} from './middlewares/index';
 
 import {wrap} from 'async-middleware';
 
-export class ImportRouter extends BaseRouter {
+export class DeploymentApiRouter extends BaseRouter {
 
-  private _importController: ImportController;
+  private _deploymentApiController: DeploymentApiController;
   private _identityService: IIdentityService;
 
-  constructor(importController: ImportController, identityService: IIdentityService) {
+  constructor(deploymentApiController: DeploymentApiController, identityService: IIdentityService) {
     super();
-    this._importController = importController;
+    this._deploymentApiController = deploymentApiController;
     this._identityService = identityService;
   }
 
-  private get importController(): ImportController {
-    return this._importController;
+  private get deploymentApiController(): DeploymentApiController {
+    return this._deploymentApiController;
   }
 
   public get baseRoute(): string {
@@ -37,8 +38,9 @@ export class ImportRouter extends BaseRouter {
   }
 
   private registerRoutes(): void {
-    const controller: ImportController = this.importController;
+    const controller: DeploymentApiController = this.deploymentApiController;
 
     this.router.post(restSettings.paths.importProcessModel, wrap(controller.importProcessModel.bind(controller)));
+    this.router.post(restSettings.paths.undeployProcessModel, wrap(controller.undeployProcessModel.bind(controller)));
   }
 }
