@@ -1,16 +1,16 @@
 'use strict'
 
-const ImportEndpoint = require('./dist/commonjs/index').Endpoints.Import;
+const {DeploymentApiController, DeploymentApiRouter} = require('./dist/commonjs/index');
 const routerDiscoveryTag = require('@essential-projects/bootstrapper_contracts').routerDiscoveryTag;
 
 function registerInContainer(container) {
 
-  container.register('DeploymentApiImportRouter', ImportEndpoint.ImportRouter)
+  container.register('DeploymentApiImportRouter', DeploymentApiRouter)
     .dependencies('DeploymentApiImportController', 'IdentityService')
     .singleton()
     .tags(routerDiscoveryTag);
 
-  container.register('DeploymentApiImportController', ImportEndpoint.ImportController)
+  container.register('DeploymentApiImportController', DeploymentApiController)
     .dependencies('DeploymentApiService')
     .singleton();
 }
